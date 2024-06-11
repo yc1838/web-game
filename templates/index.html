@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Web Game</title>
+    <!-- Include Phaser.js via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #game-container {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Web Game</h1>
+    <div id="game-container"></div>
+    <script>
+        console.log("Starting Phaser Game");
+
+        var config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 600,
+            parent: 'game-container',
+            scene: {
+                preload: preload,
+                create: create,
+                update: update
+            }
+        };
+
+        var game = new Phaser.Game(config);
+
+        function preload () {
+            console.log("Preload");
+            // Preload assets if any
+        }
+
+        function create () {
+            console.log("Create");
+            // Create game objects
+            this.player = this.add.rectangle(400, 300, 50, 50, 0x000000);
+            console.log("Player created at", this.player.x, this.player.y);
+
+            // Add a background color
+            this.cameras.main.setBackgroundColor('#FFFFFF');
+        }
+
+        function update () {
+            console.log("Update");
+            // Update game logic
+            var cursors = this.input.keyboard.createCursorKeys();
+            if (cursors.left.isDown) {
+                this.player.x -= 5;
+            } else if (cursors.right.isDown) {
+                this.player.x += 5;
+            }
+            if (cursors.up.isDown) {
+                this.player.y -= 5;
+            } else if (cursors.down.isDown) {
+                this.player.y += 5;
+            }
+
+            console.log("Player position:", this.player.x, this.player.y);
+        }
+    </script>
+</body>
+</html>
