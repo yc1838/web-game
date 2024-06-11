@@ -53,20 +53,28 @@
 
             // Add a background color
             this.cameras.main.setBackgroundColor('#FFFFFF');
+
+            // Add cursor keys
+            this.cursors = this.input.keyboard.createCursorKeys();
+            console.log("Cursor keys created", this.cursors);
         }
 
         function update () {
             console.log("Update");
-            // Update game logic
-            var cursors = this.input.keyboard.createCursorKeys();
-            if (cursors.left.isDown) {
+
+            // Update player position with boundary checks
+            if (this.cursors.left.isDown && this.player.x > 25) {
+                console.log("Left key is down");
                 this.player.x -= 5;
-            } else if (cursors.right.isDown) {
+            } else if (this.cursors.right.isDown && this.player.x < 775) {
+                console.log("Right key is down");
                 this.player.x += 5;
             }
-            if (cursors.up.isDown) {
+            if (this.cursors.up.isDown && this.player.y > 25) {
+                console.log("Up key is down");
                 this.player.y -= 5;
-            } else if (cursors.down.isDown) {
+            } else if (this.cursors.down.isDown && this.player.y < 585) {
+                console.log("Down key is down");
                 this.player.y += 5;
             }
 
